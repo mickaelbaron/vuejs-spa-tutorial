@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- App CSS -->
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <span class="navbar-brand">VM-ED</span>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="import.html">Import</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="export.html">Export</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Global configuration
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <label for="inputName">Name</label>
+                            <input type="text" class="form-control" id="inputName">
+                        </div>
+                        <div class="form-row">
+                            <label for="inputDescription">Full description</label>
+                            <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputTemplateID">Template ID</label>
+                                <input type="text" class="form-control" id="inputTemplateID">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputHostnameTemplate">Hostname template</label>
+                                <input type="text" class="form-control" id="inputHostnameTemplate">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputMemory">Memory</label>
+                                <input type="text" class="form-control" id="inputMemory">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputDisksize">Disk size</label>
+                                <input type="text" class="form-control" id="inputDisksize">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputCore">Core</label>
+                                <input type="text" class="form-control" id="inputCore">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputSocket">Socket</label>
+                                <input type="text" class="form-control" id="inputSocket">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputLogin">Login</label>
+                                <input type="text" class="form-control" id="inputLogin">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword">Password</label>
+                                <input type="text" class="form-control" id="inputPassword">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="inputSSHKey">SSH key</label>
+                            <textarea class="form-control" id="inputSSHKey" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                        <label for="inputNumberOfVM">Virtual Machines</label>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" id="inputNumberOfVM" placeholder="Number of VM">
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="card-columns">
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <div class="form-inline">
+                                <label>VM 1</label>
+                                <button class="btn x-square-fill ml-auto" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Memory</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder=""
+                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <div class="input-group-prepend">
+                                        <button class="btn trash-fill" type="button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label for="inputEmail3">New Parameter</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option disabled>Memory</option>
+                                    <option>Disk Size</option>
+                                    <option>Core</option>
+                                    <option>Socket</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <div class="form-inline">
+                                <label>VM 2</label>
+                                <button class="btn x-square-fill ml-auto" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Memory</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder=""
+                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <div class="input-group-prepend">
+                                        <button class="btn trash-fill" type="button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label for="inputEmail3">New Parameter</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option disabled>Memory</option>
+                                    <option>Disk Size</option>
+                                    <option>Core</option>
+                                    <option>Socket</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
