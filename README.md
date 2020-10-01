@@ -2,7 +2,7 @@
 
 L'objectif de cette série d'exercices est d'apprendre à développer une application SPA (*Single-Page Application*) avec le framework [Vue.js](https://vuejs.org/). Nous focaliserons les exercices sur le concept de **composant** en insistant sur la création et l'instanciation de composants puis sur la communication entre ces composants.
 
-Un seul cas d'étude est utilisé comme illustration pendant les exercices ce qui implique que tous les exercices de ce tutoriel se suivent, ils ne sont pas indépendants. Toutefois, afin que vous puissez réaliser l'ensemble des exercices demandés, nous fournissons le code de la solution du précédent exercice dans l'exercice qui suit. 
+Un seul cas d'étude est utilisé comme illustration pendant les exercices ce qui implique que tous les exercices de ce tutoriel se suivent. Ils ne sont pas indépendants. Toutefois, afin que vous puissez réaliser l'ensemble des exercices demandés, nous fournirons le code de la solution du précédent exercice dans l'exercice qui a suivi. 
 
 Par ailleurs, comme l'objectif de cette série d'exercices est la manipulation de composants, nous vous fournirons une grande partie du code HTML et JavaScript.
 
@@ -18,7 +18,7 @@ Par ailleurs, comme l'objectif de cette série d'exercices est la manipulation d
 
 ## Présentation de l'étude de cas VIE
 
-L'étude de cas présentée dans cette série d'exercices est une application appelée **VIE-UI** (Virtual machine Infrastructure for Experimentation User Interface). **VIE-UI** a pour objectif de fournir une interface graphique pour faciliter la saisie du DSL **VIE** (Virtual machine Infrastructure for Experimentation) afin de gérer une *Infrastructure as code*. Ce DSL permet de décrire la construction des ressources d'une infrastructure virtuelle. L'outillage proposé par **VIE** est utilisé au sein du LIAS pour faciliter la mise en place de configurations de machines virtuelles pour effectuer des expérimentations requises par les chercheurs du laboratoire. Concrètement, il est possible de définir le nombre de machines virtuelles en caractérisant globalement ou pour chaque machine virtuelle les spécifications techniques telles que la mémoire, le nombre de cœur, le taille des disques dur, les configurations réseaux public et privé. C'est un outillage maison qui propose des fonctionnalités basiques. Les curieux et demand
+L'étude de cas présentée dans cette série d'exercices est une application appelée **VIE-UI** (Virtual machine Infrastructure for Experimentation User Interface). **VIE-UI** a pour objectif de fournir une interface graphique pour faciliter la saisie du DSL **VIE** (Virtual machine Infrastructure for Experimentation) afin de gérer une *Infrastructure as code*. Ce DSL permet de décrire la construction des ressources d'une infrastructure virtuelle. L'outillage proposé par **VIE** est utilisé au sein du LIAS pour faciliter la mise en place de configurations de machines virtuelles pour effectuer des expérimentations requises par les chercheurs du laboratoire. Concrètement, il est possible de définir le nombre de machines virtuelles en caractérisant globalement ou pour chaque machine virtuelle les spécifications techniques telles que la mémoire, le nombre de cœur, le taille des disques dur, les configurations réseaux public et privé. C'est un outillage « maison » qui propose des fonctionnalités basiques. 
 
 Un exemple d'utilisation du DSL **VIE** est fourni sur le code ci-dessous.
 
