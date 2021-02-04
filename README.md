@@ -66,7 +66,7 @@ Vous noterez également la présence d'une barre de menu sur la partie haute des
 
 Retrouver les autres tutoriels :
 
-* [Article sur l'intégration de la bibilothèque Vue.js dans un site web existant](https://github.com/mickaelbaron/vuejs-form-tutorial) ;
+* [Tutoriel sur l'intégration de la bibilothèque Vue.js dans un site web existant](https://github.com/mickaelbaron/vuejs-form-tutorial) ;
 * [Article sur les généralités des frameworks web JavaScript et sur la présentation de Vue.js](https://mickael-baron.fr/web/vuejs-generalites-part1) ;
 * [Article sur la mise en œuvre des concepts de Vue.js](https://mickael-baron.fr/web/vuejs-miseenoeuvre-part2) ;
 * [Article sur le déploiement d'une application web développée avec Vue.js](https://mickael-baron.fr/web/vuejs-deploiement-part3).
@@ -74,5 +74,4 @@ Retrouver les autres tutoriels :
 Pour aller plus loin, vous pouvez consulter les ressources suivantes :
 
 * [Introduction au développement web avec des composants](https://mickael-baron.fr/web/intro-developpement-web-composant) ;
-* [Introduction au développement Web avec Vue.js](https://mickael-baron.fr/web/intro-vuejs) ;
-* [Tutoriel Vue.js : intégration de la biliothèque dans un site web existant](https://github.com/mickaelbaron/vuejs-form-tutorial).
+* [Introduction au développement Web avec Vue.js](https://mickael-baron.fr/web/intro-vuejs).
