@@ -1,42 +1,64 @@
+<script setup>
+import { ref, inject } from 'vue'
+
+const content = ref('')
+const store = inject('STORE')
+
+function exportJSON() {
+  content.value = JSON.stringify(store.state, null, 10)
+}
+</script>
+
 <template>
-  <div class="row">
-    <div class="col mt-3">
-      <div class="card">
+  <main>
+    <div class="container-fluid">
+      <div class="card mt-3">
         <div class="card-header">
-          <form class="form-inline">
-            <div class="form-group mb-2">
-              <label for="inputExport">Export</label>
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label for="inputNumberOfVM">Export</label>
             </div>
-            <div class="form-group ml-2 mb-2">
-              <button class="btn btn-outline-primary" disabled type="button">VIE</button>
+            <div class="col-auto">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                @click="exportJSON"
+              >
+                JSON
+              </button>
+              <button
+                class="btn btn-outline-primary ms-2"
+                disabled
+                type="button"
+              >
+                VIE
+              </button>
+              <button
+                class="btn btn-outline-primary ms-2"
+                disabled
+                type="button"
+              >
+                XCP-NG
+              </button>
+              <button
+                class="btn btn-outline-primary ms-2"
+                disabled
+                type="button"
+              >
+                PROXMOX
+              </button>
             </div>
-            <div class="form-group ml-2 mb-2">
-              <button class="btn btn-outline-primary" @click="exportJSON" type="button">JSON</button>
-            </div>
-          </form>
+          </div>
         </div>
         <div class="card-body">
-          <textarea class="form-control" id="inputExport" v-model="content" rows="25"></textarea>
+          <textarea
+            id="inputInport"
+            v-model="content"
+            class="form-control"
+            rows="25"
+          ></textarea>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
-
-<script>
-import { store } from "../store.js";
-
-export default {
-  name: "Export",
-  data() {
-    return {
-      content: "",
-    };
-  },
-  methods: {
-    exportJSON() {
-      this.content = JSON.stringify(store.state, null, 10);
-    },
-  },
-};
-</script>

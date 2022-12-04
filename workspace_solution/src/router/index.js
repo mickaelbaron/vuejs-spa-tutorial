@@ -1,14 +1,11 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import Common from '@/components/Common'
-import Import from '@/components/Import'
-import Export from '@/components/Export'
+import Global from '../components/Global.vue'
+import Import from '../components/Import.vue'
+import Export from '../components/Export.vue'
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/export',
@@ -17,8 +14,8 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'Common',
-      component: Common
+      name: 'Global',
+      component: Global
     },
     {
       path: '/import',
@@ -27,3 +24,5 @@ export default new Router({
     }
   ]
 })
+
+export default router

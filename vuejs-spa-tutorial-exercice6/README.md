@@ -1,105 +1,128 @@
-# Exercice 6 : savoir communiquer avec les événements personnalisés 
+# Exercice 6 : savoir communiquer avec les Props 
 
-Dans ce sixième exercice, nous allons réaliser une communication entre un composant parent et un composant enfant en utilisant les événements personnalisés. Pour cela, nous allons fournir une seconde implémentation pour le composant *VirtualMachineElement*. Cette nouvelle implémentation n'utilisera pas le gestionnaire d'état. Bien que ce dernier soit pratique pour fournir un modèle transverse à tous les composants, il impose aussi sa présence avec un modèle de données spécifique. Toute réutilisation de ce composant en dehors de cette application ne sera pas possible. Cette seconde implémentation du composant *VirtualMachineElement* se veut donc être générique, dans le sens où l'on puisse réutiliser ce composant pour d'autres développements sans forcément disposer d'un gestionnaire d'état transverse.
+Dans ce sixième exercice, nous allons réaliser une communication entre un composant parent et un composant enfant en utilisant des **Props**. Les **props** sont des propriétés qui sont déclarées au niveau de la fonction `defineProps` d'un composant dont les valeurs sont initialisées par son composant parent.
 
 La solution de l'exercice 5 est disponible dans le répertoire _vuejs-spa-tutorial-exercice6/vie-app_.
 
 ## But
 
-* Créer des événements personnalisés.
-* Transmettre des objets via les événements personnalisés.
-* S'abonner à des événements personnalisés.
+* Déclarer des **props** dans un composant.
+* Utiliser des **props** dans un composant.
+* Savoir instancier un composant en lui transmettant des valeurs à ses **props**.
 
 ## Étapes à suivre
 
-La seconde implémentation du composant *VirtualMachineElement* est codée dans le fichier _VirtualMachineElementWithCustomEvent.vue_. Elle fournit en entrée des **props** contenant le nom de l'attribut `elementName` (par exemple : _Login_), un identifiant d'attribut `element` (par exemple : _Credentials-login_) et la valeur actuelle `value`(par exemple : _mbaron_). Les valeurs sont transmises à la création comme expliqué dans l'[exercice précédent](../vuejs-spa-tutorial-exercice5/README.md). 
+Le composant *VirtualMachine* a besoin de connaître lors de sa création son index par rapport au gestionnaire d'état (propriété `state.vms` du fichier _store.js_). Cette information sera transmise par le composant *Global* en utilisant la communication par **props**.
+
+* Éditer le fichier _VirtualMachine.vue_ et ajouter la fonction `defineProps` où seront déclarées les **props** du composant *VirtualMachine*.
 
 ```javascript
-<script>
-export default {
-  name: "VirtualMachineElement",
-  props: {
-    elementName: {
-      type: String,
-      required: true,
-    },
-    element: {
-      type: String,
-      required: true,
-    },
-    value: {
-      type: String,
-      required: true,
-    },
-  },
-  ...
+<script setup>
+import { inject } from 'vue'
+
+import VirtualMachineElement from './VirtualMachineElement.vue'
+
+const store = inject('STORE')
+
+const props = defineProps({
+  currentIndex: {
+    type: Number,
+    required: true
+  }
+})
+</script>
+```
+
+Suivant la conception définie dans l'[exercice 1](../vuejs-spa-tutorial-exercice1/README.md), la **prop** `currentIndex` déclare un nombre (`type: Number`) qui est obligatoire (`required: true`). Veuillez noter aussi l'utilisation de la fonction `inject` qui permet d'utiliser dans ce composant le gestionnaire d'état.
+
+Une **prop** est utilisable au même titre qu'une propriété de composant, ainsi pour accéder à la **prop** `currentIndex` dans la zone `script` ou `template` il suffira juste de la nommer.
+
+* Éditer le fichier _VirtualMachine.vue_ et compléter le code afin d'utiliser une interpollation de texte à partir de la **prop** `currentIndex`.
+
+
+```html
+...
+<template>
+  <div class="col">
+    <div class="card bg-light">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
+            <label>VM {{ currentIndex + 1 }}</label>
+            <button class="btn bi-x-square-fill ml-auto" type="button"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="form-row mb-3">
+          <label class="form-label" for="inputNewParameter"
+            >New Parameter</label
+          >
+          <select id="exampleFormControlSelect1" class="form-select">
+            <option disabled>Memory</option>
+            <option>Disk Size</option>
+            <option>Core</option>
+            <option>Socket</option>
+          </select>
+        </div>
+        <!-- VirtualMachineElement component -->
+        <VirtualMachineElement />
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+Si par contre vous souhaitez utiliser une **prop** à l'intérieur de la zone `script` vous devrez passer par l'écriture suivante : `props.currentIndex`.
+
+* Éditer de nouveau le fichier _VirtualMachine.vue_ et compléter le code afin d'ajouter une fonction qui sera appelée lorsque l'utilisateur souhaitera supprimer une configuration d'une machine virtuelle.
+
+```javascript
+<script setup>
+import { inject} from 'vue'
+
+import VirtualMachineElement from './VirtualMachineElement.vue'
+
+const store = inject('STORE')
+
+const props = defineProps({
+  currentIndex: {
+    type: Number,
+    required: true
+  }
+})
+
+function onRemoveVM() {
+  store.methods.removeVM(props.currentIndex)
 }
 </script>
 ```
 
-La mise à jour des valeurs des éléments sera faite par le composant parent *VirtualMachine* au niveau de l'abonnement aux événements de cette nouvelle implémentation de *VirtualMachineElement*.
+Nous allons maintenant nous intéresser au passage d'information lors de la création du composant *VirtualMachine* depuis le composant *Global*.
 
-* Éditer le fichier _VirtualMachineElementWithCustomEvent.vue_ et ajouter dans le code du mutateur de `elementValue` le code ci-dessous.
-
-```javascript
-<script>
-export default {
-  name: "VirtualMachineElement",
-  ... // Contenu montré précédemment.
-  computed: {
-    elementValue: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        this.$emit("update-element-value", {
-          element: this.element,
-          value: value,
-        });
-      },
-    },
-  },
-  methods: {
-    removeElement() {
-      ...
-    },
-  }
-};
-</script>
-```
-
-Ce code `this.$emit("update-element-value", { ... });` permet de créer un événement appelé `update-element-value` dont le contenu est un objet qui contient deux propriétés (`element` et `value`). Cet événement sera créé et envoyé vers le composant parent à chaque fois que l'utilisateur modifiera la valeur.
-
-* Ajouter, sur le même principe que précédemment, un code dans le corps de la méthode `removeElement` permettant de créer un événement `remove-element` et qui transmet `element`. `removeElement` sera invoqué quand l'utilisateur cliquera sur le bouton supprimer.
-
-Nous allons maintenant nous occuper à mettre à jour le code du composant *VirtualMachine* pour gérer cette nouvelle implémentation de *VirtualMachineElement*.
-
-* Éditer le fichier *VirtualMachine* est mettre en commmentaire tout ce qui a un rapport avec la première implémentation (importation du composant, déclaration du composant et utilisation de la balise personnalisée).
-
-* Importer la nouvelle implémentation du composant *VirtualMachineElement* à partir du fichier _VirtualMachineElementWithCustomEvent.vue_. L'importation portera le nom de `VirtualMachineElementWithCustomEvent`.
+* Éditer le fichier _Global.vue_ et compléter le code comme montré ci-dessous.
 
 ```javascript
-import VirtualMachineElementWithCustomEvent from "@/components/VirtualMachineElementWithCustomEvent.vue";
+      <div class="card-body">
+        <div class="card-columns">
+          <div v-for="index in vmsLength" :key="index">
+            <VirtualMachine :current-index="index-1" />
+          </div>
+        </div>
+      </div>
 ```
 
-* Déclarer ce nouveau composant pour qu'il soit utilisable dans la partie `<template>`.
+Le passage du nombre `index-1` est transmis via une propriété dynamique (`:current-index` équivalent à `v-bind:current-index`). Même s'il s'agit d'une valeur statique, il est obligatoire de passer par `v-bind` pour dire à [Vue.js](https://vuejs.org/) que c'est une expression JavaScript et non pas une chaine de caractères. 
 
-```javascript
-components: {
-  VirtualMachineElementWithCustomEvent,
-},
-```
+Veuillez noter également que le nom de la propriété `current-index` n'est pas le même que le nom déclaré dans le composant *VirtualMachine* `currentIndex`. En effet, la convention impose que les propriétés soient déclarées en utilisant l'écriture camelCase (pas d'espace, ni ponctuation et en mettant en capitale la première lettre de chaque mot excepté le premier mot) et que les attributs utilisés dans les balises soient déclarées en utilisant l'écriture kebab-case (pas d'espace, ni ponctuation et en séparant chaque mot par des `-`).
 
-* Utiliser la balise personnalisée dans le corps de la directive de rendu.
+* Tester le développement réalisé et s'assurer que la numérotation des machines virtuelles est incrémentale.
 
-```javascript
-<VirtualMachineElementWithCustomEvent
-  :elementName="getTranslate(val.element)"
-  :element="getMergedCategoryAndElement(val.category, val.element)"
-  :value="val.value"
-  v-on:update-element-value="onUpdateElementValue"
-  @remove-element="onRemoveElement"
-/>
-```
+## Avez-vous bien compris, valider vos compétences ? 
 
-L'abonnement se fait par l'intermédiaire de la directive `v-on` ou sa version simplifiée `@`. Le premier abonnement signifie qu'à chaque émission de l'événement `update-element-value`, la méthode `onUpdateElementValue` est appelée. Sur le même principe à chaque fois que l'événement `remove-element` est émis, la méthode `onRemoveElement`est appelée.
+Le composant *VirtualMachineElement* a besoin de connaître lors de sa création l'index de la machine virtuelle courante, la catégorie de l'élément (`HardwareSpecification`, `Credentials` et `Network`) et la propriété de la catégorie (par exemple : `core` pour la catégorie `HardwareSpecification`). Ces informations seront obligatoirement transmises par le composant *VirtualMachine* en utilisant la communication par **props**.
+
+* Éditer le composant *VirtualMachineElement* pour ajouter trois nouvelles **props**.
+
+* Éditer le composant *VirtualMachine* pour transmettre les trois valeurs aux trois **props** lors de la création du composant *VirtualMachineElement*.

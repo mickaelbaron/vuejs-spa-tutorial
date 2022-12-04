@@ -1,12 +1,5 @@
+<script setup></script>
+
 <template>
-  <div class="container-fluid" id="app"></div>
+  <div class="container-fluid"></div>
 </template>
-
-<script>
-export default {
-  name: "App",
-};
-</script>
-
-<style>
-</style>

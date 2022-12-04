@@ -1,121 +1,238 @@
-# Exercice 3 : savoir instancier les composants 
+# Exercice 3 : savoir créer des composants à partir d'un template HTML
 
-Dans l'exercice précédent, nous avons créé des fichiers *.vue* pour le développement de tous les composants et nous nous sommes limités à la partie graphique sans s'intéresser aux comportements dynamiques. Par ailleurs, tous les composants sont indépendants. Ce troisième exercice 
-propose d'apprendre à instancier des composants en utilisant des balises personnalisées afin de construire une structure hiérarchique conforme à l'interface graphique de l'application **Vie-UI**.
+Ce troisième exercice propose de transformer le code fourni par la maquette HTML en composant [Vue.js](https://vuejs.org/) depuis le projet créé dans l'exercice précédent.
 
-La solution de l'exercice 2 est disponible dans le répertoire _vuejs-spa-tutorial-exercice3/vie-app_.
+Pour rappel la maquette graphique est disponible dans le répertoire _htmldesign/_.
 
 ## But
 
-* Savoir importer des composants.
-* Savoir instancer des composants.
+* Développer des composants dans des fichiers portant l'extension *.vue*.
+* Déclarer des bibliothèques CSS.
 
 ## Étapes à suivre
 
-Nous allons commencer par le composant racine défini par le fichier _App.vue_. C'est le composant parent des composants *MenuBar*, *Import*, *Common* ou *Export*. Pour les trois derniers composants, le choix sera fait en fonction du routage choisi (traité dans le dernier exercice). Pour simplifier, nous utiliserons directement les composant *MenuBar* et *Common*.
+Avant de développer les différents composants en créant les fichiers au format *.vue*, nous allons déclarer les deux bibliothèques CSS dans le projet [Vue.js](https://vuejs.org/). Comme *App.vue* est le composant racine, nous déclarons dans partie `<style>` les deux bibliothèques.
 
-* Éditer le fichier _App.vue_ et compléter par le code ci-dessous.
+* Éditer le fichier _src/App.vue_ et compléter par le code présenté ci-dessous.
 
 ```html
+<script setup></script>
+
 <template>
-  <div class="container-fluid" id="app">
-    <menuBar />
-  </div>
+  <div class="container-fluid"></div>
 </template>
 
-<script>
-import menuBar from "@/components/MenuBar.vue";
-
-export default {
-  name: "App",
-  components: { menuBar },
-};
-</script>
-
 <style>
+@import 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css';
+@import 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css';
 </style>
 ```
 
-Le fichier _MenuBar.vue_ qui décrit le composant *MenuBar* est importé dans le composant racine par cette instruction `import menuBar from "@/components/MenuBar.vue"`. Il est associé à la balise personnalisée `<menuBar>` et utilisable dans le code du composant racine par cette instruction `components: { menuBar }`. Par conséquent, il est possible d'utiliser cette balise personnalisée dans la partie `<template>`.
+> Afin de s'assurer que la modification a été prise en compte, vous pouvez tester l'application (`$ npm run dev`) et vérifier que le contenu de la balise `<head>` contient la déclaration des deux bibliothèques.
 
-* Compléter le fichier _App.vue_ qui décrit le composant racine afin d'ajouter le composant *Common*.
-
-* Tester l'application via la ligne de commande `$ npm run serve`. Vous devriez obtenir le résultat suivant.
-
-![Application avec les composants MenuBar et Common](./images/root-component.png "Application avec les composants MenuBar et Common")
-
-Nous allons maintenant instancier les composants *VirtualMachine* et *VirtualMachineElement* qui sont respectivement utilisés dans le composant *Common* et *VirtualMachine*.
-
-* Éditer le fichier _src/components/Common.vue_ en déclarant le composant *VirtualMachine*.
+Nous allons maintenant créer tous les composants de l'application. Sur le code présenté ci-dessous sont détaillées les balises racines qui permettent d'identifier le code à copier dans les fichiers `*.vue`. Par exemple pour le composant *MenuBar*, il suffira de copier le contenu de la balise `<header>`.
 
 ```html
-<script>
-import VirtualMachine from "@/components/VirtualMachine.vue";
+<body>
+    <div class="container-fluid">
+        <!-- Composant MenuBar.vue -->
+        <header>
+            ...
+        </header>
 
-export default {
-  name: "Common",
-  components: {
-    VirtualMachine,
-  }
-};
-</script>
+        <!-- Composant Global.vue -->
+        <main>
+            ...
+            <!-- Contenu VirtualMachine.vue -->
+            <div class="col">
+                ...
+                <!-- Contenu VirtualMachineElement.vue -->
+                <div class="form-group mb-2">
+                    ...
+                </div>
+            </div>
+        </main>
+        <!-- Composant Footer.vue -->
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        </footer>
+    </div>
+</body>
 ```
 
-Pour l'utilisation de la balise personnalisée `VirtualMachine`, nous allons contourner le cahier des charges définis préalablement. En effet, comme nous ne pouvons pas encore utiliser le gestionnaire d'état, nous allons nous appuyer sur une propriété du composant *Common* `vmsLengthTemp` qui stockera le nombre d'instance du composant *VirtualMachine*. Ce besoin est décrit dans le code ci-dessous du fichier *common.vue*. **Dans la suite des exercices ce code sera supprimé.**
+* Créer un fichier _src/components/MenuBar.vue_ et copier le contenu de la balise `<header>` à l'intérieur de la balise `<template>` comme montré sur le code ci-dessous.
 
 ```html
-<script>
-import VirtualMachine from "@/components/VirtualMachine.vue";
+<script setup></script>
 
-export default {
-  name: "Common",
-  components: {
-    VirtualMachine,
-  },
-  data() {
-    return {
-      vmsLengthTemp: 1,
-    };
-  },
-};
-</script>
-```
-
-* Dans la partie `<template>` du fichier _common.vue_, identifier la zone relative aux machines virtuelles (`<label for="inputNumberOfVM">Virtual Machines</label>`) puis compléter par les directives [Vue.js](https://vuejs.org/) présentes dans le code suivant.
-
-```html
-    ...
-    <div class="card mt-3">
-      <div class="card-header">
-        <div class="form-inline">
-          <div class="form-group">
-            <label for="inputNumberOfVM">Virtual Machines</label>
-          </div>
-          <div class="form-group mx-2">
-            <input type="text" class="form-control" id="inputNumberOfVM" v-model.number.lazy="vmsLengthTemp" placeholder="Number of VM" />
+<template>
+  <header>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand">VIE-IE</span>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Import</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Export</a>
+            </li>
+          </ul>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="flexSwitchCheckDefault"
+            />
+            <label
+              class="form-check-label text-white-50"
+              for="flexSwitchCheckDefault"
+              >Debug Mode</label
+            >
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-columns">
-          <div v-for="index in vmsLengthTemp" :key="index">
-            <VirtualMachine />
+    </nav>
+  </header>
+</template>
+```
+
+* Créer un fichier _src/components/Footer.vue_ et copier le contenu de la balise `<footer>` à l'intérieur de la balise `<template>` comme montré sur le code ci-dessous.
+
+```html
+<script setup></script>
+
+<template>
+  <footer
+    class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+  >
+    <div class="col-md-6 d-flex align-items-center">
+      <span class="text-muted"
+        >Developped with
+        <i class="bi-heart-fill" style="font-size: 1rem; color: red"></i> by
+        Mickael BARON</span
+      >
+    </div>
+
+    <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
+      <li class="ms-3">
+        <a
+          class="text-muted"
+          target="_blank"
+          href="https://twitter.com/mickaelbaron"
+          ><i class="bi-twitter" style="font-size: 1rem"></i
+        ></a>
+      </li>
+      <li class="ms-3">
+        <a
+          class="text-muted"
+          target="_blank"
+          href="https://github.com/mickaelbaron"
+          ><i class="bi-github" style="font-size: 1rem"></i
+        ></a>
+      </li>
+    </ul>
+  </footer>
+</template>
+```
+
+* Créer un fichier _src/components/Global.vue_ et copier le contenu de la balise `<main>` à l'intérieur de la balise `<template>` comme montré sur le code ci-dessous. Ce composant *Global* a une dépendance vers le composant *VirtualMachine*. Veuillez donc ne pas copier le contenu HTML relatif à ce composant. Le résultat attendu est montré sur le code ci-dessous.
+
+```html
+<script setup></script>
+
+<template>
+  <main>
+    <div class="container-fluid">
+        ... 
+    </div>
+
+    <div class="container-fluid">
+      <div class="card mt-3">
+        <div class="card-header">
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label for="inputNumberOfVM">Virtual Machines</label>
+            </div>
+            <div class="col-md-3">
+              <input
+                id="inputNumberOfVM"
+                type="text"
+                class="form-control"
+                placeholder="Number of VM"
+              />
+            </div>
           </div>
         </div>
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
+          <!-- VirtualMachine component -->
+        </div>
+      </div>
+    </div>
+  </main>
+</template>
+```
+
+* Créer un fichier _src/components/VirtualMachine.vue* et copier le contenu de la balise `<div class="col">` (voir le contenu présentant les principales balises). Ce composant *VirtualMachine* a une dépendance vers le composant *VirtualMachineElement*. Veuillez donc ne pas copier le contenu HTML relatif à ce composant. Le résultat attendu est montré sur le code ci-dessous.
+
+```html
+<script setup></script>
+
+<template>
+  <div class="col">
+    <div class="card bg-light">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
+            <label>VM</label>
+            <button class="btn bi-x-square-fill ml-auto" type="button"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="form-row mb-3">
+          <label class="form-label" for="inputNewParameter"
+            >New Parameter</label
+          >
+          <select id="exampleFormControlSelect1" class="form-select">
+            <option disabled>Memory</option>
+            <option>Disk Size</option>
+            <option>Core</option>
+            <option>Socket</option>
+          </select>
+        </div>
+        <!-- VirtualMachineElement component -->
       </div>
     </div>
   </div>
 </template>
 ```
 
-Le code précédent définit une liaison bidirectionnelle entre la balise `<input>` et la propriété `vmsLengthTemp` par l'intermédiaire de la directive `v-model`. Plus précisément, le résultat sera transformé en nombre `v-model.number` et la valeur saisie sera envoyée à la propriété `vmsLengthTemp` dés que le focus sur le composant `<input>` sera perdu `v-model.number.lazy`.
+* Créer un fichier _src/components/VirtualMachineElement.vue* et copier le contenu de la balise `<div class="form-group mb-2">`(voir le contenu présentant les principales balises). Le résultat attendu est montré sur le code ci-dessous.
 
-Par ailleurs, la directive `v-for` est utilisée pour construire un nombre `vmsLengthTemp` d'instances de composant *VirtualMachine*.
+```html
+<script setup></script>
+
+<template>
+  <div class="form-group mb-2">
+    <label class="form-label" for="inputName"></label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="" />
+      <div class="input-group-prepend">
+        <button class="btn bi-trash-fill" type="button"></button>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+Si vous testez l'application, il n'y aura aucun affichage car nous n'avons pas encore instancié les composants, il s'agit de l'objectif de l'exercice suivant.
 
 ## Avez-vous bien compris, valider vos compétences ? 
 
-* Déclarer dans le composant *VirtualMachine* le composant *VirtualMachineElement*.
+* Développer les composants *Import* et *Export* dans les fichiers *Import.vue* et *Export.vue*.
 
-* Construire une seule instance du composant *VirtualMachineElement* à partir de la balise personnalisée `<VirtualMachineElement/>` et tester pour obtenir le résultat ci-dessous.
-
-![Composant VirtualMachine et VirtualMachineElement](./images/virtualmachineelement.png "Composant VirtualMachine et VirtualMachineElement")
+* Depuis les templates HTML fournis par le site [HTML5 UP](https://html5up.net/), choisir un template et refaire le même découpage en composant.

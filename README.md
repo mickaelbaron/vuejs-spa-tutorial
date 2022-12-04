@@ -1,24 +1,26 @@
 # Tutoriel Vue.js : savoir développer une application SPA (Single-Page Application)
 
-L'objectif de cette série d'exercices est d'apprendre à développer une application SPA (*Single-Page Application*) avec le framework [Vue.js](https://vuejs.org/). Nous focaliserons les exercices sur le concept de **composant** en insistant sur la création et l'instanciation de composants puis sur la communication entre ces composants.
+L'objectif de cette série d'exercices est d'apprendre à développer une application SPA (*Single-Page Application*) avec le framework [Vue.js](https://vuejs.org/). Nous focaliserons les exercices sur le concept de **composant** en insistant sur la création et l'instanciation de composants, sur la communication entre ces composants et sur la mise en place d'un gestionnaire d'états.
 
 Un seul cas d'étude est utilisé comme illustration pendant les exercices ce qui implique que tous les exercices de ce tutoriel se suivent. Ils ne sont pas indépendants. Toutefois, afin que vous puissez réaliser l'ensemble des exercices demandés, nous fournirons le code de la solution du précédent exercice dans l'exercice qui a suivi. 
 
 Par ailleurs, comme l'objectif de cette série d'exercices est la manipulation de composants, nous vous fournirons une grande partie du code HTML et JavaScript.
 
-**Buts pédagogiques** : identifier les composants d'une interface graphique, utiliser l'outil en ligne de commande [Vue.CLI](https://cli.vuejs.org/), développer un composant, instancier un composant, communiquer via un gestionnaire d'états, via des événements personnalisés, via des propriétés, décrire et gérer des routes de navigation.
+[Vue.js](https://vuejs.org/) 3 a été utilisée pour cette série d'exercices. Cette série d'exercices est également disponible pour la version [Vue.js](https://vuejs.org/) 2 : [Branch Vue.js 2](https://github.com/mickaelbaron/vuejs-form-tutorial/tree/vuejs2).
 
-> Ce dépôt est utilisé dans le cadre d'un cours sur le développement d'applications web que je dispense en français à l'[ISAE-ENSMA](https://www.ensma.fr) pour les étudiants en dernière année du cycle d'ingénieur qui suivent l'option informatique. Tous les supports de cours et tutoriaux sont disponibles sur ma page Developpez.com : [https://mbaron.developpez.com](https://mbaron.developpez.com/#page_web) et sur ma page personnelle : [https://mickael-baron.fr/](https://mickael-baron.fr/).
+**Buts pédagogiques** : identifier les composants d'une interface graphique, utiliser l'outil en ligne de commande [Vite](https://vitejs.dev/), développer un composant, instancier un composant, communiquer via un gestionnaire d'états, via des événements personnalisés, via des propriétés et enfin décrire et gérer des routes de navigation.
+
+> Ce dépôt est utilisé dans le cadre d'un cours sur le développement d'applications web que je dispense en français à l'[ISAE-ENSMA](https://www.ensma.fr) pour les étudiants en dernière année du cycle d'ingénieur qui suivent l'option informatique. Tous les supports de cours et tutoriaux sont disponibles sur ma page personnelle : [https://mickael-baron.fr/](https://mickael-baron.fr/).
 
 ## Prérequis logiciels
 
 * Éditeur de code [Visual Studio Code](https://code.visualstudio.com/) ;
 * Navigateur web [Firefox](https://www.mozilla.org/firefox/) ou [Chrome](https://www.google.com/chrome/browser/desktop/index.html) ;
-* Le gestionnaire de paquet [npm](https://www.npmjs.com/).
+* Gestionnaire de paquet [npm](https://www.npmjs.com/).
 
 ## Présentation de l'étude de cas VIE
 
-L'étude de cas présentée dans cette série d'exercices est une application appelée **VIE-UI** (Virtual machine Infrastructure for Experimentation User Interface). **VIE-UI** a pour objectif de fournir une interface graphique pour faciliter la saisie du DSL **VIE** (Virtual machine Infrastructure for Experimentation) afin de gérer une *Infrastructure as code*. Ce DSL permet de décrire la construction des ressources d'une infrastructure virtuelle. L'outillage proposé par **VIE** est utilisé au sein du LIAS pour faciliter la mise en place de configurations de machines virtuelles pour effectuer des expérimentations requises par les chercheurs du laboratoire. Concrètement, il est possible de définir le nombre de machines virtuelles en caractérisant globalement ou pour chaque machine virtuelle les spécifications techniques telles que la mémoire, le nombre de cœur, le taille des disques dur, les configurations réseaux public et privé. C'est un outillage « maison » qui propose des fonctionnalités basiques. 
+L'étude de cas présentée dans cette série d'exercices est une application appelée **VIE-UI** (Virtual machine Infrastructure for Experimentation User Interface). **VIE-UI** a pour objectif de fournir une interface graphique pour faciliter la saisie du DSL **VIE** (Virtual machine Infrastructure for Experimentation) afin de gérer une *Infrastructure as code*. Ce DSL permet de décrire la construction des ressources d'une infrastructure virtuelle. L'outillage proposé par **VIE** est utilisé au sein du [LIAS](https://www.lias-lab.fr) pour faciliter la mise en place de configurations de machines virtuelles pour effectuer des expérimentations requises par les chercheurs du laboratoire. Par exemple, il est possible de définir le nombre de machines virtuelles en caractérisant globalement ou pour chaque machine virtuelle les spécifications techniques telles que la mémoire, le nombre de cœur, le taille des disques dur, les configurations réseaux public et privé. C'est un outillage interne au [LIAS](https://www.lias-lab.fr) propose des fonctionnalités basiques. 
 
 Un exemple d'utilisation du DSL **VIE** est fourni sur le code ci-dessous.
 
@@ -54,13 +56,13 @@ Cette interface graphique contient dans la zone *Global Configuration* tous les 
 
 ![Interface pour exporter une expérimentation](./images/vie-ui_export.png "Interface pour exporter une expérimentation")
 
-Cette interface graphique permet d'exporter le contenu de l'expérimentation saisie dans l'interface graphique de saisie. Deux formats sont proposés : un format générique JSON et un format respectant la syntaxe du DSL **VIE**.
+Cette interface graphique permet d'exporter le contenu de l'expérimentation saisie dans l'interface graphique de saisie. Plusieurs formats sont proposés, seul le format JSON est fonctionnel.
 
 ![Interface pour importer une expérimentation](./images/vie-ui_import.png "Interface pour importer une expérimentation")
 
 Cette interface graphique permet d'importer le contenu d'une précédente expérimentation. Seul le format JSON est supporté, celui généré par l'interface graphique d'exportation.
 
-Vous noterez également la présence d'une barre de menu sur la partie haute des trois interfaces graphiques. Selon l'interface graphique active, les éléments de la barre de menu (*Home*, *Import* et *Export*) sont mis en gras.
+Vous noterez également la présence d'une barre de menu sur la partie haute des trois interfaces graphiques. Selon l'interface graphique active, les éléments de la barre de menu (*Home*, *Import* et *Export*) sont mis en gras. Un bouton *Debug Mode* permet d'activer ou pas l'affichage sur la console du navigateur.
 
 ## Ressources
 

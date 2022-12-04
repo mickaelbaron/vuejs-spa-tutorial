@@ -1,198 +1,278 @@
-# Exercice 2 : savoir créer un projet et des composants
+# Exercice 2 : savoir créer un projet et configurer son environnement de développement
 
-Ce deuxième exercice propose de construire un projet [Vue.js](https://vuejs.org/) à partir de l'outil **Vue CLI** et de transformer le code fourni par la maquette en composants [Vue.js](https://vuejs.org/). 
-
-Pour rappel la maquette graphique est disponible dans le répertoire _htmldesign/_.
+Ce deuxième exercice propose de construire un projet [Vue.js](https://vuejs.org/) à partir de l'outil [Vite](https://vitejs.dev/) et de configurer son environnement de développement afin d'utiliser un *linter* ([ESLint](https://eslint.org/)), un formateur de code ([Prettier](https://prettier.io/)) et un éditeur de code ([Visual Studio Code](https://code.visualstudio.com/)).
 
 ## But
 
-* Manipuler l'outil **Vue CLI**.
-* Construire un projet [Vue.js](https://vuejs.org/) à partir d'un assistant.
-* Construire et tester une application web [Vue.js](https://vuejs.org/).
-* Développer un composant avec un fichier portant l'extension *.vue*.
-
+* Construire un projet [Vue.js](https://vuejs.org/) à partir de [Vite](https://vitejs.dev/).
+* Configurer des outils d'analyse statique (Linter) et de formattage de code.
+* Configurer l'environnement de développement [Visual Studio Code](https://code.visualstudio.com/).
+* Compiler et exécuter une application web [Vue.js](https://vuejs.org/).
 
 ## Étapes à suivre
 
-* Ouvrir un terminal et saisir la commande suivante pour vérifier que l'outil **Vue CLI** fonctionne correctement.
+* Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial-exercice2_ et saisir la ligne de commande ci-dessous pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
 
 ```console
-$ vue info
-
-Environment Info:
-
-  System:
-    OS: macOS 10.15.6
-    CPU: (12) x64 Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-  Binaries:
-    Node: 14.2.0 - /usr/local/bin/node
-    Yarn: 1.22.4 - /usr/local/bin/yarn
-    npm: 6.14.8 - /usr/local/bin/npm
-  Browsers:
-    Chrome: 85.0.4183.121
-    Edge: Not Found
-    Firefox: 81.0
-    Safari: 14.0
-  npmGlobalPackages:
-    @vue/cli: 4.5.4
+$ npm create vite@latest vie-app
 ```
 
-* Nous allons créer notre premier projet avec **Vue CLI**. Depuis la racine du dossier _vuejs-spa-tutorial-exercice2_, saisir la ligne de commande suivante pour créer le projet _vie-app_. Une série de questions vous sera posée.
+* Sélectionner *Vue*. Vous remarquerez que [Vite](https://vitejs.dev/) n'est pas uniquement réservé à [Vue.js](https://vuejs.org/).
 
 ```console
-vue create vie-app
-```
-
-* Sélectionner le dernier élément afin de choisir manuellement le paramétrage.
-
-```console
-Vue CLI v4.5.6
-? Please pick a preset:
-  Default ([Vue 2] babel, eslint)
-  Default (Vue 3 Preview) ([Vue 3] babel, eslint)
-❯ Manually select features
+? Select a framework: › - Use arrow-keys. Return to submit.
+    Vanilla
+❯   Vue
+    React
+    Preact
+    Lit
+    Svelte
+    Others
 ````
 
-* Sélectionner les plugins [Babel](https://babeljs.io/) (un compilateur JavaScript permettant d’utiliser des syntaxes récentes du langage qui seront traduites en JavaScript compréhensible par la plupart des versions des navigateurs) et **Linter / Formatter** (un outil d’analyse statique du code JavaScript permettant de détecter des erreurs avant l’exécution et des problèmes de style).
+* Sélectionner ensuite la première option *JavaScript* qui permet le développement avec ce langage. La deuxième option permet d’utiliser le langage TypeScript.
 
 ```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: (Press <space> to select, <a> to toggle all, <i> to invert selection)
- ◉ Choose Vue version
- ◉ Babel
- ◯ TypeScript
- ◯ Progressive Web App (PWA) Support
- ◯ Router
- ◯ Vuex
-❯◯ CSS Pre-processors
- ◉ Linter / Formatter
- ◯ Unit Testing
- ◯ E2E Testing
- ```
-
-* Sélectionner la version 2.x puisque la version 3.x à l'écriture de ce tutoriel n'était pas encore disponible en version finale.
-
-```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Choose Vue version, Babel, Router, Linter
-? Choose a version of Vue.js that you want to start the project with
-❯ 2.x
-  3.x (Preview)
+? Select a variant: › - Use arrow-keys. Return to submit.
+❯   JavaScript
+    TypeScript
+    Customize with create-vue ↗
+    Nuxt ↗
 ```
 
-* Pour l’option **Linter / Formatter**, choisir le premier élément afin d’afficher la moindre erreur détectée. C’est assez contraignant au début, mais quel plaisir d’avoir un code propre qui respecte les conventions de codage. Le **Linter** utilisé par défaut sera [ESLint](https://eslint.org/).
+* La création de votre projet [Vue.js](https://vuejs.org/) à partir du langage JavaScript est terminée.
 
 ```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Choose Vue version, Babel, Linter
-? Choose a version of Vue.js that you want to start the project with 2.x
-? Pick a linter / formatter config:
-❯ ESLint with error prevention only
-  ESLint + Airbnb config
-  ESLint + Standard config
-  ESLint + Prettier
+✔ Select a framework: › Vue
+✔ Select a variant: › JavaScript
+
+Scaffolding project in /Users/baronm/workspacepersowebsite/vuejs-spa-tutorial/vie-app...
+
+Done. Now run:
+
+  cd vie-app
+  npm install
+  npm run dev
 ```
 
-* Choisir le premier élément pour lancer le **Linter** à chaque sauvegarde d’un fichier JavaScript.
+* Installer toutes les dépendances nécessaires en exécutant la ligne de commande suivante :
 
 ```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Choose Vue version, Babel, Linter
-? Choose a version of Vue.js that you want to start the project with 2.x
-? Pick a linter / formatter config: Basic
-? Pick additional lint features:
-❯◉ Lint on save
- ◯ Lint and fix on commit
+$ cd vie-app
+$ npm install
+
+added 33 packages, and audited 34 packages in 9s
+
+4 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 ```
 
-* Choisir le second élément pour stocker les informations spécifiques de [Babel](https://babeljs.io/) et [ESLint](https://eslint.org/) dans le fichier _package.json_. À noter que même avec ce choix, un fichier _babel.config.js_ sera quand même créé.
+Nous proposons dans la suite d'installer le *linter* [ESLint](https://eslint.org/) (outil de fond qui réalise une analyse statique du code source pour trouver des incohérences ou des anomalies) et le formateur de code [Prettier](https://prettier.io/) (outil de forme qui applique des règles de formatage : indentation, nombre de caractères maximum, etc.). Cette étape n'est pas obligatoire, mais recommandé pour fournir un code de qualité.
+
+* Depuis la racine du dossier _vuejs-spa-tutorial-exercice2_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
 
 ```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Choose Vue version, Babel, Linter
-? Choose a version of Vue.js that you want to start the project with 2.x
-? Pick a linter / formatter config: Basic
-? Pick additional lint features: Lint on save
-? Where do you prefer placing config for Babel, ESLint, etc.?
-  In dedicated config files
-❯ In package.json
+$ npm install --save-dev --save-exact prettier
+
+added 34 packages, and audited 35 packages in 8s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 ```
 
-* Choisir de sauvegarder ou pas, si vous souhaitez que vos précédents choix soient considérés par défaut pour les prochaines créations de projets.
+* Créer le fichier *.prettierrc* à la racine du dossier _vie-app_ puis saisir le contenu suivant.
+
+```json
+{
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "none"
+}
+```
+
+* Installer l'outil [ESLint](https://eslint.org/) pour la version [Vue.js](https://vuejs.org/).
 
 ```console
-Vue CLI v4.5.6
-? Please pick a preset: Manually select features
-? Check the features needed for your project: Choose Vue version, Babel, Linter
-? Choose a version of Vue.js that you want to start the project with 2.x
-? Pick a linter / formatter config: Basic
-? Pick additional lint features: Lint on save
-? Where do you prefer placing config for Babel, ESLint, etc.? In package.json
-? Save this as a preset for future projects? (y/N)
+$ npm install --save-dev eslint eslint-plugin-vue
+
+added 109 packages, and audited 144 packages in 4s
+
+31 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 ```
 
-La création de votre projet va se dérouler, veuillez patienter que les modules NPM soient téléchargés.
+* Créer le fichier *.eslintrc.cjs* à la racine du dossier _vie-app_ puis saisir le contenu suivant.
+
+```JavaScript
+module.exports = {
+    env: {
+      node: true,
+    },
+    extends: [
+      'eslint:recommended',
+      'plugin:vue/vue3-recommended',
+      "prettier"
+    ],
+    rules: {
+      // override/add rules settings here, such as:
+      // 'vue/no-unused-vars': 'error'
+    }
+  }
+```
+
+* Exécuter la commande suivante pour désactiver les règles de formattage de [ESLint](https://eslint.org/) afin de les déléguer à [Prettier](https://prettier.io/).
 
 ```console
-Vue CLI v4.5.6
-✨  Creating project in /Users/baronm/workspacepersowebsite/vuejs-spa-tutorial/vuejs-spa-tutorial-exercice2/vie-app.
-⚙️  Installing CLI plugins. This might take a while...
+$ npm install eslint-config-prettier --save-dev
 
-⸨ ░░░░░░░░░░░░░░░░░⸩ ⠇ fetchMetadata: sill pacote range manifest for unique-filename@^1.1.1 fetched in 43ms
+added 1 package, and audited 145 packages in 919ms
+
+31 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 ```
+
+* Éditer le fichier *package.json* afin d'ajouter deux scripts (`lint` et `format`) permettant de lancer les outils [ESLint](https://eslint.org/) et [Prettier](https://prettier.io/) depuis la ligne de commande.
+
+```json
+{
+  "name": "vie-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.8.0",
+    "prettier": "2.8.0",
+    "vite": "^3.2.3"
+  }
+}
+```
+
+* Depuis l'invite de commande, tester le premier script `lint`.
+
+```console
+$ npm run lint
+
+> vie-app@0.0.0 lint
+> eslint --ext .js,.vue --ignore-path .gitignore --fix src
+
+
+/Users/baronm/workspacepersowebsite/vuejs-spa-tutorial/vuejs-spa-tutorial-exercice2/vie-app/src/components/HelloWorld.vue
+  5:3  warning  Prop 'msg' requires default value to be set  vue/require-default-prop
+
+✖ 1 problem (0 errors, 1 warning)
+```
+
+On remarque lors de l'exécution de [ESLint](https://eslint.org/) qu'une erreur a été identifiée. Le `linter` reproche au code existant l'absence d'initialisation pour la Prop `msg` du fichier `HelloWorld.vue`.
+
+* Depuis l'invite de commande, tester le second script `format`.
+
+```console
+$ npm run format
+
+> vie-app@0.0.0 format
+> prettier .  --write
+
+.eslintrc.cjs 49ms
+.prettierrc 29ms
+.vscode/extensions.json 3ms
+index.html 40ms
+package-lock.json 113ms
+package.json 15ms
+README.md 43ms
+src/App.vue 50ms
+src/components/HelloWorld.vue 23ms
+src/main.js 4ms
+src/style.css 20ms
+vite.config.js 7ms
+```
+
+Tous les fichiers du répertoire _vie-app_ sont formattés selon le format du fichier (*.vue*, *.js*, *.json*, etc.).
+
+L'exécution des scripts `lint` et `format` est utile principalement pour l'intégration continue, mais dans le cadre de cette série d'exercices nous avons besoin d'utiliser l'éditeur de code [Visual Studio Code](https://code.visualstudio.com/). Pour le développement de projet [Vue.js](https://vuejs.org/), nous aurons besoin d'installer les plugins [Volar](https://github.com/johnsoncodehk/volar), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode).
+
+* Depuis l'invite de commande et en se positionnant à la racine du dossier _vie-app_, démarrer [Visual Studio Code](https://code.visualstudio.com/) via la commande suivante.
+
+```console
+$ code .
+```
+
+> Si la commande *code* ne fonctionne pas, démarrer [Visual Studio Code](https://code.visualstudio.com/) par son raccourci et ouvrir le dossier _vie-app_ depuis le menu *Fichier* (*Fichier -> Ouvrir le dossier...*). 
+
+* Installer les plugins [Volar](https://github.com/johnsoncodehk/volar), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode) depuis le menu Extensions.
+
+* Configurer les paramètres utilisateurs stockées dans le fichier *settings.json* et ajouter les éléments suivants.
+
+```json
+  ...
+  "[vue]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+Les paramètres ajoutés précisent que le formattage de code sera réalisé à chaque sauvegarde et utilisera le formatteur [Prettier](https://prettier.io/).
+
+L'environnement de développement est désormais complet, nous allons pouvoir examiner le contenu généré par [Vite](https://vitejs.dev/).
 
 * Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vi-app_.
 
 ```console
 vie-app
 ├── README.md
-├── babel.config.js
-├── node_modules/
+├── index.html
+├── node_modules\...
 ├── package-lock.json
 ├── package.json
-├── public/
-│   ├── favicon.ico
-│   └── index.html
-└── src/
-    ├── App.vue
-    ├── assets
-    │   └── logo.png
-    ├── components
-    │   └── HelloWorld.vue
-    └── main.js
+├── public
+│   └── vite.svg
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   └── vue.svg
+│   ├── components
+│   │   └── HelloWorld.vue
+│   ├── main.js
+│   └── style.css
+└── vite.config.js
 ```
 
-Le fichier _README.md_ décrit les différentes commandes à utiliser avec l'outil **npm**. 
+Le fichier _README.md_ donne une description de la manière dont le contenu a été généré.
 
-Le fichier _babel.config.js_ est un fichier de configuration pour le transpileur [Babel](https://babeljs.io/). Ce dernier permet de générer du code JavaScript exécutable sur n’importe quel navigateur web. L’avantage est de pouvoir utiliser des versions récentes de JavaScript comme par exemple ES2015+.
+Le fichier _index.html_ est le point d’entrée de votre application. Tout le code que vous allez développer sera injecté dans `<div id="app"></div>`. Vous ne devriez pas directement modifier ce fichier.
 
 Le fichier _package.json_ est le fichier de configuration de votre projet. Ce fichier de configuration contient de métadonnées pour décrire le projet : `name` et `version`. Il contient également les dépendances vers les bibliothèques utilisées par le projet.
 
 Le répertoire _node_modules_ contient l’ensemble des modules nécessaires pour la construction du projet. Ce répertoire est obtenu automatiquement en exécutant le script `$ npm install`. L’outil **npm** se base alors sur le fichier _package.json_ pour télécharger les modules directs et transitifs. Par comparaison, c’est très ressemblant à Maven de l’univers Java où _pom.xml_ correspond au fichier _package.json_.
 
-Le répertoire _public_ est utilisé pour stocker les fichiers statiques HTML. Le fichier _index.html_ est le point d’entrée de votre application. Tout le code que vous allez développer sera injecté dans `<div id="app"></div>`. Vous ne devriez pas trop intervenir dans la modification de ce fichier excepté pour enrichir le contenu de la balise `<head>` (voir demande ci-dessous). 
-
-* Éditer le fichier _index.html_ et ajouter dans la balise `<head>`, la bibliothèque CSS [Boostrap](https://getbootstrap.com/).
-
-```html
-<head>  
-  ...
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-</head>
-```
-
-Le fichier *src/main.js* sert à configurer notre projet en permettant d'initialiser des variables globales et de préciser où le rendu doit être effectué (`$mount('#app'))`).
+Le répertoire _public_ est utilisé pour stocker les ressources statiques (des images par exemple) qui se situent au niveau de _index.html_.
 
 Le fichier *src/App.vue* est le premier composant de votre application qui va contenir tous les autres composants. Il est en quelque sorte le composant racine d’une application de type Single-Page application (SPA).
 
-Le répertoire _src/assets_ contient toutes les ressources de votre projet (images, vidéos et fichiers à télécharger).
+Le fichier *src/main.js* sert à configurer notre projet en permettant d'initialiser des variables globales et de préciser où le rendu doit être effectué (`createApp(App).mount('#app')`).
+
+Le répertoire _src/assets_ contient les ressources qui se situent au niveau des composants.
 
 Le répertoire _src/components_ contient tous les composants que vous allez développer. Tous les fichiers porteront l’extension _*.vue_. Actuellement, seul un composant est disponible appelé *HelloWorld*.
 
@@ -201,70 +281,57 @@ Le répertoire _src/components_ contient tous les composants que vous allez dév
 ```console
 $ npm run serve
 
- DONE  Compiled successfully in 1044ms
+  VITE v3.2.4  ready in 384 ms
 
-  App running at:
-  - Local:   http://localhost:8080/
-  - Network: unavailable
-
-  Note that the development build is not optimized.
-  To create a production build, run npm run build.
+  ➜  Local:   http://127.0.0.1:5173/
+  ➜  Network: use --host to expose
 ```
 
-* Ouvrir un navigateur web à l'adresse http://localhost:8080 pour visualiser le résultat de l'exécution.
+* Ouvrir un navigateur web à l'adresse http://127.0.0.1:5173/ pour visualiser le résultat de l'exécution.
 
 ![Application HelloWorld](./images/helloworld.png "Application HelloWorld")
 
-Avant de démarrer le développement, nous allons supprimer tout le code inutile généré par l'outil **Vue CLI** (composant *HelloWorld*).
+Avant de démarrer le développement, nous allons supprimer tout le code inutile généré par l'outil [Vite](https://vitejs.dev/) (composant *HelloWorld*).
 
-* Stopper l'exécution, supprimer le fichier _src/components/HelloWorld.vue_ et remplacer le contenu du fichier _App.vue_ par le code ci-dessous.
+* Stopper l'exécution.
+
+* Supprimer le fichier _src/components/HelloWorld.vue_, le fichier _src/style.css_, les ressources statiques _public/vite.svg_ et _src/assets/vue.svg_ 
+
+* Remplacer le contenu du fichier _src/App.vue_ par le code ci-dessous.
 
 ```html
-<template>
-  <div class="container-fluid" id="app"></div>
-</template>
-
-<script>
-export default {
-  name: "App",
-};
+<script setup>
 </script>
 
-<style>
-</style>
-```
-
-Nous allons maintenant développer la partie graphique des composants [Vue.js](https://vuejs.org/) à partir de la maquette fournie dans le répertoire _htmldesign/_. Il vous sera donc demandé de copier/coller le code HTML dans le corps de la balise `<template>` de chaque composant. À cette étape, il n'y aura pas de comportement. Nous souhaitons reproduire le résultat fourni par maquette avec une approche par composants.
-
-* Créer un nouveau fichier _MenuBar.vue_ dans le répertoire _src/components_ et y copier le code HTML de la barre de navigation (code disponible dans les trois fichiers HTML du répertoire _htmldesign/_). Le résultat est montré dans le code ci-dessous.
-
-```html
 <template>
-  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-    <span class="navbar-brand">VIE-UI</span>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Import</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Export</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
     </div>
-  </nav>
 </template>
-
-<script>
-export default {
-  name: "MenuBar",
-};
-</script>
 ```
 
-* Sur le même principe que le fichier _MenuBar.vue_, créer dans le répertoire _src/components_ les fichiers _Common.vue_, _Export.vue_, _Import.vue_, _VirtualMachine.vue_ et _VirtualMachineElement.vue_ correspondant aux composants restants à développer.
+* Remplacer le contenu du fichier _src/main.js_ par le code ci-dessous.
 
-Si vous testez l'application, il n'y aura aucun affichage car nous n'avons pas encore instancié les composants, il s'agit de l'objectif de l'exercice suivant.
+```html
+import { createApp } from 'vue'
+import App from './App.vue'
+
+createApp(App).mount('#app')
+```
+
+Le contenu des fichiers et répertoires devrait ressembler à celui présenté ci-dessous.
+
+```console
+vie-app
+├── README.md
+├── index.html
+├── node_modules\
+├── package-lock.json
+├── package.json
+├── public\
+├── src
+│   ├── App.vue
+│   ├── assets\
+│   ├── components\
+│   └── main.js
+└── vite.config.js
+```

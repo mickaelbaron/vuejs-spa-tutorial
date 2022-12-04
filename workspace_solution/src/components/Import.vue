@@ -1,39 +1,43 @@
+<script setup>
+import { ref, inject } from 'vue'
+
+const content = ref('')
+const store = inject('STORE')
+
+function importJSON() {
+  store.methods.setState(JSON.parse(content.value))
+}
+</script>
+
 <template>
-  <div class="row">
-    <div class="col mt-3">
-      <div class="card">
+  <main>
+    <div class="container-fluid">
+      <div class="card mt-3">
         <div class="card-header">
-          <form class="form-inline">
-            <div class="form-group mb-2">
-              <label for="inputImport">Import</label>
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label for="inputNumberOfVM">Import</label>
             </div>
-            <div class="form-group ml-2 mb-2">
-              <button class="btn btn-outline-primary" @click="importJSON" type="button">JSON</button>
+            <div class="col-md-3">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                @click="importJSON"
+              >
+                JSON
+              </button>
             </div>
-          </form>
+          </div>
         </div>
         <div class="card-body">
-          <textarea v-model="content" class="form-control" id="inputImport" rows="25"></textarea>
+          <textarea
+            id="inputInport"
+            v-model="content"
+            class="form-control"
+            rows="25"
+          ></textarea>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
-
-<script>
-import { store } from "../store.js";
-
-export default {
-  name: "Import",
-  data() {
-    return {
-      content: "",
-    };
-  },
-  methods: {
-    importJSON() {
-      store.setState(JSON.parse(this.content));
-    },
-  },
-};
-</script>
