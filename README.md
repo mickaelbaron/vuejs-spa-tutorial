@@ -6,7 +6,7 @@ Un seul cas d'étude est utilisé comme illustration pendant les exercices ce qu
 
 Par ailleurs, comme l'objectif de cette série d'exercices est la manipulation de composants, nous vous fournirons une grande partie du code HTML et JavaScript.
 
-[Vue.js](https://vuejs.org/) 3 a été utilisée pour cette série d'exercices. Cette série d'exercices est également disponible pour la version [Vue.js](https://vuejs.org/) 2 : [Branch Vue.js 2](https://github.com/mickaelbaron/vuejs-form-tutorial/tree/vuejs2).
+[Vue.js](https://vuejs.org/) 3 a été utilisée pour cette série d'exercices. Cette série d'exercices est également disponible pour la version [Vue.js](https://vuejs.org/) 2 : [Branch Vue.js 2](https://github.com/mickaelbaron/vuejs-spa-tutorial/tree/vuejs2).
 
 **Buts pédagogiques** : identifier les composants d'une interface graphique, utiliser l'outil en ligne de commande [Vite](https://vitejs.dev/), développer un composant, instancier un composant, communiquer via un gestionnaire d'états, via des événements personnalisés, via des propriétés et enfin décrire et gérer des routes de navigation.
 
