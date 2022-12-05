@@ -5,6 +5,7 @@ import { RouterView } from 'vue-router'
 
 import MenuBar from './components/MenuBar.vue'
 import Footer from './components/Footer.vue'
+
 import store from './store.js'
 
 provide('STORE', store)
