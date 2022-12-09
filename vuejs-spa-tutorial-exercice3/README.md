@@ -175,7 +175,7 @@ Nous allons maintenant créer tous les composants de l'application. Sur le code 
 </template>
 ```
 
-* Créer un fichier _src/components/VirtualMachine.vue* et copier le contenu de la balise `<div class="col">` (voir le contenu présentant les principales balises). Ce composant *VirtualMachine* a une dépendance vers le composant *VirtualMachineElement*. Veuillez donc ne pas copier le contenu HTML relatif à ce composant. Le résultat attendu est montré sur le code ci-dessous.
+* Créer un fichier _src/components/VirtualMachine.vue_ et copier le contenu de la balise `<div class="col">` (voir le contenu présentant les principales balises). Ce composant *VirtualMachine* a une dépendance vers le composant *VirtualMachineElement*. Veuillez donc ne pas copier le contenu HTML relatif à ce composant. Le résultat attendu est montré sur le code ci-dessous.
 
 ```html
 <script setup></script>

@@ -38,7 +38,7 @@ import Footer from './components/Footer.vue'
 
 Le fichier _MenuBar.vue_ qui décrit le composant *MenuBar* est importé dans le composant racine par cette instruction `import MenuBar from "./components/MenuBar.vue"`. Il est associé à la balise personnalisée `<MenuBar>` et il est donc possible de l'utiliser dans la partie `<template>`.
 
-* Tester l'application via la ligne de commande `$ npm run serve`. Vous devriez obtenir le résultat suivant.
+* Tester l'application via la ligne de commande `$ npm run dev`. Vous devriez obtenir le résultat suivant.
 
 ![Application avec les composants MenuBar, Global et Footer](./images/root-component.png "Application avec les composants MenuBar, Global et Footer")
 
