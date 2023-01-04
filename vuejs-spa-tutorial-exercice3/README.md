@@ -11,21 +11,75 @@ Pour rappel la maquette graphique est disponible dans le répertoire _htmldesign
 
 ## Étapes à suivre
 
-Avant de développer les différents composants en créant les fichiers au format *.vue*, nous allons déclarer les deux bibliothèques CSS dans le projet [Vue.js](https://vuejs.org/). Comme *App.vue* est le composant racine, nous déclarons dans partie `<style>` les deux bibliothèques.
+Avant de développer les différents composants en créant les fichiers au format *.vue*, nous allons déclarer la bibliothèque CSS [Bootstrap](https://getbootstrap.com) dans le projet [Vue.js](https://vuejs.org/). Plusieurs possibilités sont offertes :
 
-* Éditer le fichier _src/App.vue_ et compléter par le code présenté ci-dessous.
+* en intégrant directement les fichiers compilés CSS et JS dans le projet ;
+* en référençant des liens depuis un CDN (Content Delivery Network) ;
+* en utilisant un gestionnaire de dépendance.
 
-```html
-<script setup></script>
+C'est la dernière solution que nous utiliserons puisque dans le cas de ces exercices nous utilisons [npm](https://www.npmjs.com/). L'avantage de cette solution est de pouvoir gérer toutes les dépdendances a un même endroit, ce qui facilitera les futures montées vers des versions plus récentes des bibliothèques que nous utilisons.
 
-<template>
-  <div class="container-fluid"></div>
-</template>
+* Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial-exercice2/vie-app_ et saisir les lignes de commande ci-dessous pour installer et déclarer dans le fichier package.json les dépendances vers [Bootstrap](https://getbootstrap.com).
 
-<style>
-@import 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css';
-@import 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css';
-</style>
+```console
+# Ajout de la dépendance Boostrap (CSS et JS)
+$ npm install --save bootstrap
+
+# Ajout de la dépendance Boostrap-Icons pour intégrer une bibliothèque d'icônes
+$ npm install --save bootstrap-icons
+
+# Ajout de la dépendance popperjs pour la gestion du positionnement de certains éléments (popup, tooltip...)
+$ npm install --save @popperjs/core
+```
+
+À la fin de cette opération le fichier _package.json_ aura été impacté comme présenté ci-dessous.
+
+```json
+{
+  "name": "vie-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.8.0",
+    "prettier": "2.8.0",
+    "vite": "^3.2.3"
+  }
+}
+```
+
+* Afin de déclarer la bibliothèque [Bootstrap](https://getbootstrap.com), éditer le fichier _main.js_ et ajouter les trois lignes d'importation.
+
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Dépendance vers le fichier CSS de Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css"
+// Dépendance vers le fichier CSS de Bootstrap-Icons
+import "bootstrap-icons/font/bootstrap-icons.css"
+// Dépendance vers le fichier JavaScript de Bootstrap (pour gérer les aspects dynamiques)
+import "bootstrap"
+
+const app = createApp(App)
+
+app.mount('#app')
 ```
 
 > Afin de s'assurer que la modification a été prise en compte, vous pouvez tester l'application (`$ npm run dev`) et vérifier que le contenu de la balise `<head>` contient la déclaration des deux bibliothèques.
