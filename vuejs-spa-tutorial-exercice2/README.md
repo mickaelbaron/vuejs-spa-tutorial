@@ -71,7 +71,7 @@ found 0 vulnerabilities
 
 Nous proposons dans la suite d'installer le *linter* [ESLint](https://eslint.org/) (outil de fond qui réalise une analyse statique du code source pour trouver des incohérences ou des anomalies) et le formateur de code [Prettier](https://prettier.io/) (outil de forme qui applique des règles de formatage : indentation, nombre de caractères maximum, etc.). Cette étape n'est pas obligatoire, mais recommandé pour fournir un code de qualité.
 
-* Depuis la racine du dossier _vuejs-spa-tutorial-exercice2_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
+* Toujours dans le dossier _vie-app_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
 
 ```console
 $ npm install --save-dev --save-exact prettier
