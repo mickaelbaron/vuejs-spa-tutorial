@@ -279,7 +279,7 @@ Le répertoire _src/components_ contient tous les composants que vous allez dév
 * Toujours depuis le terminal, saisir la commande suivante pour tester l'application *HelloWorld*.
 
 ```console
-$ npm run serve
+$ npm run dev
 
   VITE v3.2.4  ready in 384 ms
 
