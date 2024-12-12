@@ -236,7 +236,7 @@ Les paramètres ajoutés précisent que le formattage de code sera réalisé à 
 
 L'environnement de développement est désormais complet, nous allons pouvoir examiner le contenu généré par [Vite](https://vitejs.dev/).
 
-* Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vi-app_.
+* Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vie-app_.
 
 ```console
 vie-app
