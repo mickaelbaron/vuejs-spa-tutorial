@@ -71,7 +71,7 @@ found 0 vulnerabilities
 
 Nous proposons dans la suite d'installer le *linter* [ESLint](https://eslint.org/) (outil de fond qui réalise une analyse statique du code source pour trouver des incohérences ou des anomalies) et le formateur de code [Prettier](https://prettier.io/) (outil de forme qui applique des règles de formatage : indentation, nombre de caractères maximum, etc.). Cette étape n'est pas obligatoire, mais recommandé pour fournir un code de qualité.
 
-* Depuis la racine du dossier _vuejs-spa-tutorial-exercice2_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
+* Toujours dans le dossier _vie-app_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
 
 ```console
 $ npm install --save-dev --save-exact prettier
@@ -236,7 +236,7 @@ Les paramètres ajoutés précisent que le formattage de code sera réalisé à 
 
 L'environnement de développement est désormais complet, nous allons pouvoir examiner le contenu généré par [Vite](https://vitejs.dev/).
 
-* Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vi-app_.
+* Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vie-app_.
 
 ```console
 vie-app
@@ -279,7 +279,7 @@ Le répertoire _src/components_ contient tous les composants que vous allez dév
 * Toujours depuis le terminal, saisir la commande suivante pour tester l'application *HelloWorld*.
 
 ```console
-$ npm run serve
+$ npm run dev
 
   VITE v3.2.4  ready in 384 ms
 

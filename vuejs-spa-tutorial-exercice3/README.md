@@ -265,7 +265,7 @@ Nous allons maintenant créer tous les composants de l'application. Sur le code 
 </template>
 ```
 
-* Créer un fichier _src/components/VirtualMachineElement.vue* et copier le contenu de la balise `<div class="form-group mb-2">`(voir le contenu présentant les principales balises). Le résultat attendu est montré sur le code ci-dessous.
+* Créer un fichier _src/components/VirtualMachineElement.vue_ et copier le contenu de la balise `<div class="form-group mb-2">`(voir le contenu présentant les principales balises). Le résultat attendu est montré sur le code ci-dessous.
 
 ```html
 <script setup></script>
