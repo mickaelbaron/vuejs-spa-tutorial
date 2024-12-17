@@ -4,8 +4,6 @@ Dans ce septième exercice, nous allons réaliser une communication entre un com
 
 Cette seconde implémentation du composant *VirtualMachineElement* se veut donc être générique, dans le sens où l'on puisse réutiliser ce composant pour d'autres développements sans forcément disposer d'un gestionnaire d'état transverse.
 
-La solution de l'exercice 6 est disponible dans le répertoire _vuejs-spa-tutorial-exercice7/vie-app_.
-
 ## But
 
 * Créer des événements personnalisés.

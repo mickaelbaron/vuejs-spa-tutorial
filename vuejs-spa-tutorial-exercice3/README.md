@@ -19,7 +19,7 @@ Avant de développer les différents composants en créant les fichiers au forma
 
 C'est la dernière solution que nous utiliserons puisque dans le cas de ces exercices nous utilisons [npm](https://www.npmjs.com/). L'avantage de cette solution est de pouvoir gérer toutes les dépdendances a un même endroit, ce qui facilitera les futures montées vers des versions plus récentes des bibliothèques que nous utilisons.
 
-* Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial-exercice2/vie-app_ et saisir les lignes de commande ci-dessous pour installer et déclarer dans le fichier package.json les dépendances vers [Bootstrap](https://getbootstrap.com).
+* Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial/vie-app_ et saisir les lignes de commande ci-dessous pour installer et déclarer dans le fichier package.json les dépendances vers [Bootstrap](https://getbootstrap.com).
 
 ```console
 # Ajout de la dépendance Boostrap (CSS et JS)
@@ -44,22 +44,24 @@ $ npm install --save @popperjs/core
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "lint": "eslint .",
     "format": "prettier .  --write"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
-    "bootstrap-icons": "^1.10.3",
-    "vue": "^3.2.41"
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.8.0",
-    "prettier": "2.8.0",
-    "vite": "^3.2.3"
+    "@eslint/js": "^9.17.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.13.0",
+    "prettier": "3.4.2",
+    "vite": "^6.0.1"
   }
 }
 ```

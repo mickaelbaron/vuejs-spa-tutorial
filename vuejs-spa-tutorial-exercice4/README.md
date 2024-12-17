@@ -2,8 +2,6 @@
 
 Dans l'exercice précédent, nous avons créé des fichiers *.vue* pour le développement de tous les composants et nous nous sommes limités à la partie graphique sans s'intéresser aux comportements dynamiques. Par ailleurs, tous les composants sont indépendants. Ce troisième exercice propose d'apprendre à instancier des composants en utilisant des balises personnalisées afin de construire une structure hiérarchique conforme à l'interface graphique de l'application **Vie-UI**.
 
-La solution de l'exercice 3 est disponible dans le répertoire _vuejs-spa-tutorial-exercice4/vie-app_.
-
 ## But
 
 * Savoir importer des composants [Vue.js](https://vuejs.org/).

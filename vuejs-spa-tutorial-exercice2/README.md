@@ -11,10 +11,10 @@ Ce deuxième exercice propose de construire un projet [Vue.js](https://vuejs.org
 
 ## Étapes à suivre
 
-* Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial-exercice2_ et saisir la ligne de commande ci-dessous pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
+* Ouvrir un terminal, se positionner à la racine du dépôt _vuejs-spa-tutorial_ et saisir la ligne de commande ci-dessous pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
 
 ```console
-$ npm create vite@latest vie-app
+npm create vite@latest vie-app
 ```
 
 * Sélectionner *Vue*. Vous remarquerez que [Vite](https://vitejs.dev/) n'est pas uniquement réservé à [Vue.js](https://vuejs.org/).
@@ -27,15 +27,18 @@ $ npm create vite@latest vie-app
     Preact
     Lit
     Svelte
+    Solid
+    Qwik
+    Angular
     Others
 ````
 
-* Sélectionner ensuite la première option *JavaScript* qui permet le développement avec ce langage. La deuxième option permet d’utiliser le langage TypeScript.
+* Sélectionner ensuite l'option *JavaScript* qui permet le développement avec ce langage.
 
 ```console
 ? Select a variant: › - Use arrow-keys. Return to submit.
-❯   JavaScript
     TypeScript
+❯   JavaScript
     Customize with create-vue ↗
     Nuxt ↗
 ```
@@ -46,7 +49,7 @@ $ npm create vite@latest vie-app
 ✔ Select a framework: › Vue
 ✔ Select a variant: › JavaScript
 
-Scaffolding project in /Users/baronm/workspacepersowebsite/vuejs-spa-tutorial/vie-app...
+Scaffolding project in /Users/baronm/Public/vuejs-spa-tutorial/vie-app...
 
 Done. Now run:
 
@@ -61,7 +64,7 @@ Done. Now run:
 $ cd vie-app
 $ npm install
 
-added 33 packages, and audited 34 packages in 9s
+added 30 packages, and audited 31 packages in 7s
 
 4 packages are looking for funding
   run `npm fund` for details
@@ -74,9 +77,9 @@ Nous proposons dans la suite d'installer le *linter* [ESLint](https://eslint.org
 * Toujours dans le dossier _vie-app_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
 
 ```console
-$ npm install --save-dev --save-exact prettier
+npm install --save-dev --save-exact prettier
 
-added 34 packages, and audited 35 packages in 8s
+added 2 packages, and audited 33 packages in 682ms
 
 5 packages are looking for funding
   run `npm fund` for details
@@ -97,43 +100,43 @@ found 0 vulnerabilities
 * Installer l'outil [ESLint](https://eslint.org/) pour la version [Vue.js](https://vuejs.org/).
 
 ```console
-$ npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue
 
-added 109 packages, and audited 144 packages in 4s
+added 99 packages, and audited 134 packages in 3s
 
-31 packages are looking for funding
+33 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
 ```
 
-* Créer le fichier *.eslintrc.cjs* à la racine du dossier _vie-app_ puis saisir le contenu suivant.
+* Créer le fichier *.eslint.config.js* à la racine du dossier _vie-app_ puis saisir le contenu suivant.
 
 ```JavaScript
-module.exports = {
-    env: {
-      node: true,
-    },
-    extends: [
-      'eslint:recommended',
-      'plugin:vue/vue3-recommended',
-      "prettier"
-    ],
-    rules: {
-      // override/add rules settings here, such as:
-      // 'vue/no-unused-vars': 'error'
-    }
-  }
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import pluginVue from "eslint-plugin-vue";
+
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  {files: ["**/*.{js,mjs,cjs,vue}"]},
+  {languageOptions: { globals: globals.browser }},
+  pluginJs.configs.recommended,
+  ...pluginVue.configs["flat/essential"],
+];
 ```
+
+> Ce fichier peut-être obtenu en utilisant la commande `npx eslint --init`. Un assistant vous guidera et génèrera ce fichier de configuration.
 
 * Exécuter la commande suivante pour désactiver les règles de formattage de [ESLint](https://eslint.org/) afin de les déléguer à [Prettier](https://prettier.io/).
 
 ```console
-$ npm install eslint-config-prettier --save-dev
+npm install eslint-config-prettier --save-dev
 
-added 1 package, and audited 145 packages in 919ms
+added 1 package, and audited 133 packages in 1s
 
-31 packages are looking for funding
+33 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
@@ -143,73 +146,52 @@ found 0 vulnerabilities
 
 ```json
 {
-  "name": "vie-app",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  ...
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "lint": "eslint .",
     "format": "prettier .  --write"
   },
-  "dependencies": {
-    "vue": "^3.2.41"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.8.0",
-    "prettier": "2.8.0",
-    "vite": "^3.2.3"
-  }
+  ...
 }
 ```
 
 * Depuis l'invite de commande, tester le premier script `lint`.
 
 ```console
-$ npm run lint
+npm run lint
 
 > vie-app@0.0.0 lint
-> eslint --ext .js,.vue --ignore-path .gitignore --fix src
-
-
-/Users/baronm/workspacepersowebsite/vuejs-spa-tutorial/vuejs-spa-tutorial-exercice2/vie-app/src/components/HelloWorld.vue
-  5:3  warning  Prop 'msg' requires default value to be set  vue/require-default-prop
-
-✖ 1 problem (0 errors, 1 warning)
+> eslint .
 ```
-
-On remarque lors de l'exécution de [ESLint](https://eslint.org/) qu'une erreur a été identifiée. Le `linter` reproche au code existant l'absence d'initialisation pour la Prop `msg` du fichier `HelloWorld.vue`.
 
 * Depuis l'invite de commande, tester le second script `format`.
 
 ```console
-$ npm run format
+npm run format
 
 > vie-app@0.0.0 format
 > prettier .  --write
 
-.eslintrc.cjs 49ms
-.prettierrc 29ms
-.vscode/extensions.json 3ms
-index.html 40ms
-package-lock.json 113ms
-package.json 15ms
-README.md 43ms
-src/App.vue 50ms
-src/components/HelloWorld.vue 23ms
-src/main.js 4ms
-src/style.css 20ms
-vite.config.js 7ms
+.prettierrc 64ms
+.vscode/extensions.json 3ms (unchanged)
+eslint.config.js 13ms
+index.html 33ms (unchanged)
+package-lock.json 35ms (unchanged)
+package.json 2ms (unchanged)
+README.md 34ms (unchanged)
+src/App.vue 38ms (unchanged)
+src/components/HelloWorld.vue 13ms (unchanged)
+src/main.js 2ms (unchanged)
+src/style.css 10ms (unchanged)
+vite.config.js 3ms
 ```
 
 Tous les fichiers du répertoire _vie-app_ sont formattés selon le format du fichier (*.vue*, *.js*, *.json*, etc.).
 
-L'exécution des scripts `lint` et `format` est utile principalement pour l'intégration continue, mais dans le cadre de cette série d'exercices nous avons besoin d'utiliser l'éditeur de code [Visual Studio Code](https://code.visualstudio.com/). Pour le développement de projet [Vue.js](https://vuejs.org/), nous aurons besoin d'installer les plugins [Volar](https://github.com/johnsoncodehk/volar), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode).
+L'exécution des scripts `lint` et `format` est utile principalement pour l'intégration continue, mais dans le cadre de cette série d'exercices nous avons besoin d'utiliser l'éditeur de code [Visual Studio Code](https://code.visualstudio.com/). Pour le développement de projet [Vue.js](https://vuejs.org/), nous aurons besoin d'installer les plugins [Vue Official](https://github.com/vuejs/language-tools), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode).
 
 * Depuis l'invite de commande et en se positionnant à la racine du dossier _vie-app_, démarrer [Visual Studio Code](https://code.visualstudio.com/) via la commande suivante.
 
@@ -219,7 +201,7 @@ $ code .
 
 > Si la commande *code* ne fonctionne pas, démarrer [Visual Studio Code](https://code.visualstudio.com/) par son raccourci et ouvrir le dossier _vie-app_ depuis le menu *Fichier* (*Fichier -> Ouvrir le dossier...*). 
 
-* Installer les plugins [Volar](https://github.com/johnsoncodehk/volar), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode) depuis le menu Extensions.
+* Installer les plugins [Vue Official](https://github.com/vuejs/language-tools), [ESLint](https://github.com/Microsoft/vscode-eslint) et [Prettier](https://github.com/prettier/prettier-vscode) depuis le menu Extensions.
 
 * Configurer les paramètres utilisateurs stockées dans le fichier *settings.json* et ajouter les éléments suivants.
 
@@ -241,8 +223,9 @@ L'environnement de développement est désormais complet, nous allons pouvoir ex
 ```console
 vie-app
 ├── README.md
+├── eslint.config.js
+├── node_modules\
 ├── index.html
-├── node_modules\...
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -279,12 +262,17 @@ Le répertoire _src/components_ contient tous les composants que vous allez dév
 * Toujours depuis le terminal, saisir la commande suivante pour tester l'application *HelloWorld*.
 
 ```console
-$ npm run dev
+npm run dev
 
-  VITE v3.2.4  ready in 384 ms
+> vie-app@0.0.0 dev
+> vite
 
-  ➜  Local:   http://127.0.0.1:5173/
+
+  VITE v6.0.3  ready in 1510 ms
+
+  ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
 
 * Ouvrir un navigateur web à l'adresse http://127.0.0.1:5173/ pour visualiser le résultat de l'exécution.
@@ -324,6 +312,7 @@ Le contenu des fichiers et répertoires devrait ressembler à celui présenté c
 vie-app
 ├── README.md
 ├── index.html
+├── eslint.config.js
 ├── node_modules\
 ├── package-lock.json
 ├── package.json

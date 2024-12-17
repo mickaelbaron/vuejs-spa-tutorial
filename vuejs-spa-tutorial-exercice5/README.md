@@ -4,8 +4,6 @@ Dans ce cinquième exercice, nous commencerons à faire communiquer les composan
 
 Pour la mise en place du gestionnaire d'état de type *Do It Yourself*, nous avons suivi les préconisations proposées [ici](https://vuejs.org/guide/scaling-up/state-management.html#simple-state-management-with-reactivity-api). Nous n'utiliserons pas de bibliothèque spécifique telle que [Pinia](https://pinia.vuejs.org/). L'idée étant de maîtriser ce patron de conception avant l'utilisation d'implémentation prête à l'emploi comme [Pinia](https://pinia.vuejs.org/).
 
-La solution de l'exercice 4 est disponible dans le répertoire _vuejs-spa-tutorial-exercice5/vie-app_.
-
 ## But
 
 * Développer le patron de conception gestionnaire d'état.

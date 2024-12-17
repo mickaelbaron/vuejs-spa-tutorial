@@ -2,8 +2,6 @@
 
 Dans ce sixième exercice, nous allons réaliser une communication entre un composant parent et un composant enfant en utilisant des **Props**. Les **props** sont des propriétés qui sont déclarées au niveau de la fonction `defineProps` d'un composant dont les valeurs sont initialisées par son composant parent.
 
-La solution de l'exercice 5 est disponible dans le répertoire _vuejs-spa-tutorial-exercice6/vie-app_.
-
 ## But
 
 * Déclarer des **props** dans un composant.

@@ -8,8 +8,6 @@ Dans ce huitième exercice, nous allons mettre en place le routage qui permet en
 
 [Vue.js](https://vuejs.org/) propose un module appelé [Vue-Router](https://router.vuejs.org/) qui offre un mécanisme de gestion du routage. [Vue-Router](https://router.vuejs.org/) s’appuie sur un fichier de routage pour établir les différentes règles qui permettent de passer d’un composant à un autre en fonction de la valeur de l’URL.
 
-La solution de l'exercice 7 est disponible dans le répertoire _vuejs-spa-tutorial-exercice8/vie-app_.
-
 ## But
 
 * Activer le routage.
