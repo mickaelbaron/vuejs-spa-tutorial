@@ -21,15 +21,15 @@ C'est la dernière solution que nous utiliserons puisque dans le cas de ces exer
 
 * Ouvrir un terminal, se positionner à la racine du dossier _vuejs-spa-tutorial/vie-app_ et saisir les lignes de commande ci-dessous pour installer et déclarer dans le fichier package.json les dépendances vers [Bootstrap](https://getbootstrap.com).
 
-```console
+```bash
 # Ajout de la dépendance Boostrap (CSS et JS)
-$ npm install --save bootstrap
+npm install --save bootstrap
 
 # Ajout de la dépendance Boostrap-Icons pour intégrer une bibliothèque d'icônes
-$ npm install --save bootstrap-icons
+npm install --save bootstrap-icons
 
 # Ajout de la dépendance popperjs pour la gestion du positionnement de certains éléments (popup, tooltip...)
-$ npm install --save @popperjs/core
+npm install --save @popperjs/core
 ```
 
 À la fin de cette opération le fichier _package.json_ aura été impacté comme présenté ci-dessous.
@@ -84,7 +84,7 @@ const app = createApp(App)
 app.mount('#app')
 ```
 
-> Afin de s'assurer que la modification a été prise en compte, vous pouvez tester l'application (`$ npm run dev`) et vérifier que le contenu de la balise `<head>` contient la déclaration des deux bibliothèques.
+> Afin de s'assurer que la modification a été prise en compte, vous pouvez tester l'application (`npm run dev`) et vérifier que le contenu de la balise `<head>` contient la déclaration des deux bibliothèques.
 
 Nous allons maintenant créer tous les composants de l'application. Sur le code présenté ci-dessous sont détaillées les balises racines qui permettent d'identifier le code à copier dans les fichiers `*.vue`. Par exemple pour le composant *MenuBar*, il suffira de copier le contenu de la balise `<header>`.
 

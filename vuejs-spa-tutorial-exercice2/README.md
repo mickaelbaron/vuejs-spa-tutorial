@@ -13,13 +13,13 @@ Ce deuxième exercice propose de construire un projet [Vue.js](https://vuejs.org
 
 * Ouvrir un terminal, se positionner à la racine du dépôt _vuejs-spa-tutorial_ et saisir la ligne de commande ci-dessous pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
 
-```console
+```bash
 npm create vite@latest vie-app
 ```
 
 * Sélectionner *Vue*. Vous remarquerez que [Vite](https://vitejs.dev/) n'est pas uniquement réservé à [Vue.js](https://vuejs.org/).
 
-```console
+```bash
 ? Select a framework: › - Use arrow-keys. Return to submit.
     Vanilla
 ❯   Vue
@@ -35,7 +35,7 @@ npm create vite@latest vie-app
 
 * Sélectionner ensuite l'option *JavaScript* qui permet le développement avec ce langage.
 
-```console
+```bash
 ? Select a variant: › - Use arrow-keys. Return to submit.
     TypeScript
 ❯   JavaScript
@@ -45,7 +45,7 @@ npm create vite@latest vie-app
 
 * La création de votre projet [Vue.js](https://vuejs.org/) à partir du langage JavaScript est terminée.
 
-```console
+```bash
 ✔ Select a framework: › Vue
 ✔ Select a variant: › JavaScript
 
@@ -60,10 +60,14 @@ Done. Now run:
 
 * Installer toutes les dépendances nécessaires en exécutant la ligne de commande suivante :
 
-```console
-$ cd vie-app
-$ npm install
+```bash
+cd vie-app
+npm install
+```
 
+La sortie console attendue :
+
+```bash
 added 30 packages, and audited 31 packages in 7s
 
 4 packages are looking for funding
@@ -76,9 +80,13 @@ Nous proposons dans la suite d'installer le *linter* [ESLint](https://eslint.org
 
 * Toujours dans le dossier _vie-app_, saisir la ligne de commande ci-dessous pour installer l'outil [Prettier](https://prettier.io/).
 
-```console
+```bash
 npm install --save-dev --save-exact prettier
+```
 
+La sortie console attendue :
+
+```bash
 added 2 packages, and audited 33 packages in 682ms
 
 5 packages are looking for funding
@@ -99,9 +107,13 @@ found 0 vulnerabilities
 
 * Installer l'outil [ESLint](https://eslint.org/) pour la version [Vue.js](https://vuejs.org/).
 
-```console
+```bash
 npm install --save-dev eslint eslint-plugin-vue
+```
 
+La sortie console attendue :
+
+```bash
 added 99 packages, and audited 134 packages in 3s
 
 33 packages are looking for funding
@@ -131,9 +143,13 @@ export default [
 
 * Exécuter la commande suivante pour désactiver les règles de formattage de [ESLint](https://eslint.org/) afin de les déléguer à [Prettier](https://prettier.io/).
 
-```console
+```bash
 npm install eslint-config-prettier --save-dev
+```
 
+La sortie console attendue :
+
+```bash
 added 1 package, and audited 133 packages in 1s
 
 33 packages are looking for funding
@@ -160,18 +176,26 @@ found 0 vulnerabilities
 
 * Depuis l'invite de commande, tester le premier script `lint`.
 
-```console
+```bash
 npm run lint
+```
 
+La sortie console attendue :
+
+```
 > vie-app@0.0.0 lint
 > eslint .
 ```
 
 * Depuis l'invite de commande, tester le second script `format`.
 
-```console
+```bash
 npm run format
+```
 
+La sortie console attendue :
+
+```bash
 > vie-app@0.0.0 format
 > prettier .  --write
 
@@ -195,8 +219,8 @@ L'exécution des scripts `lint` et `format` est utile principalement pour l'int�
 
 * Depuis l'invite de commande et en se positionnant à la racine du dossier _vie-app_, démarrer [Visual Studio Code](https://code.visualstudio.com/) via la commande suivante.
 
-```console
-$ code .
+```bash
+code .
 ```
 
 > Si la commande *code* ne fonctionne pas, démarrer [Visual Studio Code](https://code.visualstudio.com/) par son raccourci et ouvrir le dossier _vie-app_ depuis le menu *Fichier* (*Fichier -> Ouvrir le dossier...*). 
@@ -220,7 +244,7 @@ L'environnement de développement est désormais complet, nous allons pouvoir ex
 
 * Les fichiers générés correspondent à une application minimaliste *HelloWorld*. Examiner les fichiers générés dans le répertoire _vie-app_.
 
-```console
+```bash
 vie-app
 ├── README.md
 ├── eslint.config.js
@@ -247,7 +271,7 @@ Le fichier _index.html_ est le point d’entrée de votre application. Tout le c
 
 Le fichier _package.json_ est le fichier de configuration de votre projet. Ce fichier de configuration contient de métadonnées pour décrire le projet : `name` et `version`. Il contient également les dépendances vers les bibliothèques utilisées par le projet.
 
-Le répertoire _node_modules_ contient l’ensemble des modules nécessaires pour la construction du projet. Ce répertoire est obtenu automatiquement en exécutant le script `$ npm install`. L’outil **npm** se base alors sur le fichier _package.json_ pour télécharger les modules directs et transitifs. Par comparaison, c’est très ressemblant à Maven de l’univers Java où _pom.xml_ correspond au fichier _package.json_.
+Le répertoire _node_modules_ contient l’ensemble des modules nécessaires pour la construction du projet. Ce répertoire est obtenu automatiquement en exécutant le script `npm install`. L’outil **npm** se base alors sur le fichier _package.json_ pour télécharger les modules directs et transitifs. Par comparaison, c’est très ressemblant à Maven de l’univers Java où _pom.xml_ correspond au fichier _package.json_.
 
 Le répertoire _public_ est utilisé pour stocker les ressources statiques (des images par exemple) qui se situent au niveau de _index.html_.
 
@@ -261,9 +285,13 @@ Le répertoire _src/components_ contient tous les composants que vous allez dév
 
 * Toujours depuis le terminal, saisir la commande suivante pour tester l'application *HelloWorld*.
 
-```console
+```bash
 npm run dev
+```
 
+La sortie console attendue :
+
+```bash
 > vie-app@0.0.0 dev
 > vite
 
@@ -308,7 +336,7 @@ createApp(App).mount('#app')
 
 Le contenu des fichiers et répertoires devrait ressembler à celui présenté ci-dessous.
 
-```console
+```bash
 vie-app
 ├── README.md
 ├── index.html

@@ -20,9 +20,13 @@ Nous allons d'abord initialiser le projet afin d'utiliser [Vue-Router](https://r
 
 * Depuis la racine du répertoire _vuejs-spa-tutorial-exercice8/vie-app_, exécuter la ligne de commande suivante.
 
-```console
-$ npm install vue-router
+```bash
+npm install vue-router
+```
 
+La sortie console attendue :
+
+```bash
 added 2 packages, and audited 147 packages in 872ms
 
 32 packages are looking for funding
