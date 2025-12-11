@@ -11,7 +11,7 @@ Ce deuxième exercice propose de construire un projet [Vue.js](https://vuejs.org
 
 ## Étapes à suivre
 
-* Ouvrir un terminal, se positionner à la racine du dépôt _vuejs-spa-tutorial_ et saisir la ligne de commande ci-dessous pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
+* Ouvrir un terminal, créer un dossier _workspace_ à la racine du dépôt _vuejs-spa-tutorial_ et saisir la ligne de commande ci-dessous dans le dossier _workspace_ pour créer le projet [Vue.js](https://vuejs.org/) _vie-app_ à partir de l'outil [Vite](https://vitejs.dev/). Une série de questions vous sera posée, nous donnerons les réponses au fur et à mesure.
 
 ```bash
 npm create vite@latest vie-app
